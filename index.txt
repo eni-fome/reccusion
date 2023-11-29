@@ -1,0 +1,43 @@
+FUNCTION isPalindrome(word: STRING) RETURNS BOOLEAN
+    // Remove spaces and convert to lowercase for case-insensitive comparison
+    cleanWord := removeSpacesAndConvertToLowercase(word)
+    
+    // Get the length of the cleaned word
+    length := length(cleanWord)
+    
+    // Initialize counters for comparison
+    start := 0
+    end := length - 1
+
+    // Loop until the start and end counters meet in the middle
+    WHILE start < end DO
+        // Compare characters at the start and end positions
+        IF cleanWord[start] ≠ cleanWord[end] THEN
+            RETURN FALSE  // Not a palindrome
+        END IF
+
+        // Move counters towards the center
+        start := start + 1
+        end := end - 1
+    END WHILE
+
+    // If the loop completes, the word is a palindrome
+    RETURN TRUE
+END FUNCTION
+
+FUNCTION removeSpacesAndConvertToLowercase(input: STRING) RETURNS STRING
+    // Initialize an empty string to store the cleaned word
+    cleanedWord := ""
+
+    // Loop through each character in the input word
+    FOR i FROM 0 TO length(input) - 1 DO
+        // Check if the character is not a space
+        IF input[i] ≠ " " THEN
+            // Append the lowercase version of the character to the cleaned word
+            cleanedWord := cleanedWord + toLower(input[i])
+        END IF
+    END FOR
+
+    // Return the cleaned word
+    RETURN cleanedWord
+END FUNCTION
